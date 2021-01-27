@@ -1,0 +1,22 @@
+.sentence1 {
+  width: 100%;
+  height: 30vh;
+  align-items: center;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    .text-section {
+      text-align: center;
+      p {
+        color: $dark;
+        font-size: $fontMiddle;
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

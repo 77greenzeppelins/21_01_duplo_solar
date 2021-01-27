@@ -1,0 +1,16 @@
+//colors
+$light: hsl(0, 0, 100);
+$dark: hsl(0, 0, 0);
+$grey: rgb(132, 129, 122);
+$brand: hsl(120, 100, 42);
+
+$yellow: rgb(249, 202, 36);
+// $yellow: rgb(229, 142, 38);
+
+$blue: rgb(6, 82, 221);
+//fonts
+$serif: 'Playfair Display', serif;
+$sanserif: 'Montserrat', sans-serif;
+$reactFont: #{'calc(10px + 2vmin)'};
+$fontMiddle: #{'clamp(1.2rem, 4.5vw, 2.3rem)'};
+// $fontMiddle: #{'clamp(1rem, 3vw, 1.3rem)'};
