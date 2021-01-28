@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { textForArticles } from '../../assets/dataForArticles/dataForArticles';
 
 const Sentence3 = () => {
@@ -20,7 +21,9 @@ const Sentence3 = () => {
           </p>
         </div>
       </article>
-      <nav className="callToAction"></nav>
+      <nav>
+        <Link to="/contact" className="callToAction" />
+      </nav>
     </section>
   );
 };

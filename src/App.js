@@ -1,44 +1,30 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './styles/App.scss';
-// import { textAnimation } from '../src/animations/animations';
-import { initialAnimation } from '../src/animations/animations';
 
-//
-import InitialOverlay from './components/initialOverlay/initialOverlay';
-import ContentOverlay from './components/contentOverlay/contentOverlay';
-import Header from './components/header/header';
-import Sentence1 from './components/sentence1/sentence1';
-import Sentence2 from './components/sentence2/sentence2';
-import Sentence3 from './components/sentence3/sentence3';
+import Home from './components/pages/home';
+import Contact from './components/pages/contact';
+import Test from './components/pages/test';
 
-const animationsTargets = [
-  '.overlay-initial',
-  '.overlay-initial .logo',
-  '.content-overlay .overlay__top',
-  '.content-overlay .overlay__bottom',
-  '.sentence1 p',
-  '.sentence2 p',
-  '.devices-icons svg',
-  '.sentence3',
-  '.sentence3 .sentence3__top p',
-  '.sentence3 .sentence3__bottom p',
-  '.item-to-buy',
+//array of pages
+const routes = [
+  { id: 1, path: '/', name: 'Home', Destination: Home },
+  { id: 2, path: '/test', name: 'Home', Destination: Test },
+  { id: 3, path: '/contact', name: 'Home', Destination: Contact },
 ];
 
 function App() {
-  useEffect(() => {
-    initialAnimation(...animationsTargets);
-  }, []);
-
   return (
-    <div className="App">
-      <InitialOverlay />
-      <ContentOverlay />
-      <Header />
-      <Sentence1 />
-      <Sentence2 />
-      <Sentence3 />
-    </div>
+    <>
+      <Switch>
+        {routes.map(({ id, path, Destination }) => (
+          <Route exact id={id} path={path}>
+            <Destination />
+          </Route>
+        ))}
+        dest
+      </Switch>
+    </>
   );
 }
 
