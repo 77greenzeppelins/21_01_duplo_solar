@@ -4,12 +4,11 @@
 @import 'variables';
 @import 'utilities';
 //
-@import 'initialOverlay';
-@import 'contentOverlay';
-@import 'header';
-@import 'sentence1';
-@import 'sentence2';
-@import 'sentence3';
+@import '_initialOverlay';
+@import '_contactPage';
+@import '_screenATop';
+@import '_screenABottom';
+@import '_screenB';
 
 //from Kevin Powell, Responsive designe...
 *,
@@ -29,6 +28,9 @@ html {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body {
+  min-height: -webkit-fill-available;
 }
 
 body,
@@ -69,6 +71,33 @@ img {
   display: block;
   max-width: 100%;
 }
-// .App {
-//   position: relative;
-// }
+
+//styles for contact
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $dark;
+}
+.contact-content {
+  color: $light;
+}
+
+//style for CSSTransition
+
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+  transition-delay: 600ms;
+}
+.page-exit {
+  opacity: 1;
+}
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 400ms;
+}

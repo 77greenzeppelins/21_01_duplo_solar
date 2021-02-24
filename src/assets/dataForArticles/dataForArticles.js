@@ -16,15 +16,48 @@ const textForArticles = {
 
 const itemsToBuy = [
   'pasjonujące książki...',
-  'cele harytatywne...',
-  'hamburgery z kolą...',
+  'prezenty dla dzieci...',
+  'cele charytatywne...',
+  'hamburgery i frytki...',
   'egzotyczne podróże...',
-  'nowe inwestycje...',
+  'odważne inwestycje...',
   'odjechane koncerty...',
-  'nowe, niezbędne buty...',
-  'singlemalta z Islay...',
-  'zachcianki dzieci...',
+  'zakupowe szaleństwa...',
+  'dobre whisky z Islay...',
   'bezdomne zwierząta...',
 ];
 
-export { textForArticles, itemsToBuy };
+const contactPageInvitation = {
+  a1: 'Cześć!',
+  a2: 'Jesteśmy duploELEMENTS.',
+
+  b1: 'Rozumiemy, że wyobraziłeś sobie',
+  b2: 'swój ukochany dom z całą tą',
+  b3: 'infastrukturą fotowoltaiczną,',
+  b4: 'oraz te wszystkie kierunki rozwoju',
+  b5: 'wynikające z uzyskanych oszczędności',
+
+  c1: 'Znakomicie! Bo tak to właśnie działa.',
+  c2: 'Zostaw nam proszę kontakt do siebie',
+  c3: 'może być mail lub numer telefonu',
+
+  d1: 'Chętnie pokażemy Ci, jakie to  proste.',
+
+  ax1:
+    'Skoro wyobraziłeś sobie to wszystko, swój ukochany dom z cała tą infastrukturą fotowoltaiczną pozostaje nam już tylko jedno...',
+  ax2:
+    'Skontaktujmy się! Zostaw swojego maila lun numer terlefonu, jak wolisz.',
+};
+
+const contactPageForm = {
+  requiredEmail: 'Proszę wpisz swój email w polu powyżej',
+  requiredTerms:
+    'Proszę abyś wyraził zgodę zaznaczając powyższe pole. Jeden mały znaczek i wszystko załatwione',
+  emailLength: 'Wpisany email wydaje się trochę zbyt krótki...',
+  emailTypes: 'Niesamowite, że twój email nie zawiera małpy...czyli tego: @',
+  numberlength:
+    'Wpisz dokładnie 9 cyfr, bez jakichkolwiek odstępów (dodatkowych znaków)',
+  numberTypes: 'Czyzby twój numer składał sie nie tylko z cyfr???',
+};
+
+export { textForArticles, itemsToBuy, contactPageInvitation, contactPageForm };

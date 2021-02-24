@@ -1,7 +1,12 @@
 .sentence1 {
+  position: absolute;
+  top: 100px;
+  left: 0;
   width: 100%;
   height: 30vh;
+  // height: #{'calc(30vh - 100px)'};
   align-items: center;
+  // border: 1px solid red;
   .container {
     display: flex;
     flex-direction: column;

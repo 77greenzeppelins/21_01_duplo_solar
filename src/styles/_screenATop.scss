@@ -1,0 +1,47 @@
+.a-top {
+  position: relative;
+  height: 35vh;
+  // background-color: #ecf0f1;
+  overflow: hidden;
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 1);
+  }
+
+  &__nav {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      font-size: $reactFont;
+      font-family: $sanserif;
+      color: $light;
+      mix-blend-mode: difference;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    // background-color: #bdc3c7;
+    height: #{'calc(100% - 100px)'};
+
+    li {
+      color: $dark;
+      font-size: $fontMiddle;
+    }
+    li:nth-of-type(2) {
+      font-weight: 600;
+    }
+  }
+}

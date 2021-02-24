@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <section className="header">
-      <h1 className="logo">
+      <Link to="/contact" className="logo">
         <span>duplo</span>ELEMENTS
-      </h1>
+      </Link>
     </section>
   );
 };

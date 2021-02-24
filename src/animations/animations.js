@@ -1,101 +1,202 @@
 import gsap from 'gsap';
-import { TextPlugin } from 'gsap/TextPlugin';
-//
 import { itemsToBuy } from '../assets/dataForArticles/dataForArticles';
 
-//definition of function that returns main animation = main timeline;
-//parameters are names of targets for individual tweens;
-const initialAnimation = (
-  overlayInitial,
-  initialLogo,
-  overlayTop,
-  overlayBottom,
-  sentence1,
-  sentence2,
-  iconsOfDevices,
-  sentence3,
-  sentence3__top,
-  sentence3__bottom,
-  itemToBuy
-) => {
-  //registration of TextPlugin
-  gsap.registerPlugin(TextPlugin);
-  //main timeline initialization
-  const tl = gsap.timeline({ defaults: { ease: 'Power2.easeOut' } });
-  //timeLine for changing words///// { repeat: -1 }
-  const tlForItemsToBuy = gsap.timeline().pause();
-  //main timeline specification
-  tl.fromTo(
-    initialLogo,
-    {
-      scale: 2.2,
-    },
-    {
-      scale: 1.7,
-      duration: 1.5,
-    }
-  )
-    .to(overlayInitial, {
+const initialAnimation = () => {
+  //for tests
+  console.log(`%cJust for testing the animation...`, 'color:red');
+  console.log(itemsToBuy);
+  //main timeline initialization + predefinitions of ease = it mens we want this ease in each tween
+  const mainTimeline = gsap.timeline({ defaults: { ease: 'Power2.easeOut' } });
+  //=============================================================================
+  /**
+   * Part of animation that displayes individual items from an array...
+   */
+  const textAnimationTimeline = gsap.timeline({ repeat: 1 });
+
+  const textAnimation = () => {
+    const textLayers = document.querySelectorAll(
+      '.b-screen__animated-items div'
+    );
+    textLayers.forEach(item => {
+      textAnimationTimeline.fromTo(
+        item,
+        { opacity: 0, scale: 1 },
+        {
+          opacity: 1,
+          scale: 1.1,
+          duration: 1,
+          repeat: 1,
+          yoyo: true,
+          yoyoEase: true,
+          repeatDelay: 1,
+        }
+      );
+    });
+    gsap.set('.b-screen__animated-items', { visibility: 'visible' });
+  };
+  //=========================================================================
+  //Let's run the main timeline !!!
+  mainTimeline
+    .add('startFromHere')
+    .fromTo(
+      '.overlay-initial .logo',
+      {
+        scale: 2.2,
+      },
+      {
+        scale: 1.7,
+        duration: 1.5,
+      }
+    )
+    .to('.overlay-initial', {
       duration: 1.8,
       x: '-100%',
       transformOrigin: '100% 0%',
-      // display: 'none',
     })
-    .call(removeElement, ['.overlay-initial .logo'])
-    .call(overlayAnimationHorizontal, [overlayTop], '-=1.5')
-    .call(textAnimationHorizontal, [sentence1], '-=1.5')
-    .call(overlayAnimationVertical, [overlayBottom], '+=1.5')
-    .call(textAnimationVertical, [sentence2], '-=0.7')
+    .call(removeElement('.overlay-initial'))
+    //==================================================  animation  of  the  screen A Top
     .fromTo(
-      iconsOfDevices,
+      '.a-top__overlay',
+      { scaleX: 1, transformOrigin: '0% 100%' },
+      {
+        duration: 2,
+        scaleX: 0,
+      },
+      '-=1.5'
+    )
+    .from(
+      '.a-top__text li',
+      {
+        scale: 1.5,
+        duration: 1.5,
+        opacity: 0,
+        stagger: 0.4,
+        transformOrigin: '0% 100%',
+      },
+      '-=1.5'
+    )
+    //====================================================animation  of  the  screen A Bottom
+    .fromTo(
+      '.a-bottom__text li',
       {
         opacity: 0,
-        // scale: 0.8,
-        stagger: 0.1,
       },
-      { duration: 2, opacity: 1, stagger: 0.1 },
-      '+=3'
+      {
+        duration: 1.5,
+
+        opacity: 1,
+        stagger: 0.5,
+      }
     )
     .fromTo(
-      sentence3,
-      { opacity: 0, display: 'none' },
+      '.a-bottom__overlay',
+      { scaleY: 1, transformOrigin: '0% 100%' },
+      {
+        duration: 1.5,
+        scaleY: 0,
+      },
+      '-=1'
+    )
+
+    .fromTo(
+      '.icon',
+      {
+        opacity: 0,
+      },
+      { duration: 2, opacity: 1, stagger: 0.4 },
+      '-=1'
+    )
+    //================================================animations  of  the  screen B
+    // .add('startFromScreenB')
+    // .add('stopBeforeScreenB')
+    .to('.b-screen', { duration: 1, opacity: 1 })
+    .to('.a-bottom', { backgroundColor: '#000000' }, '>')
+    .fromTo(
+      '.b-screen__text li',
+      { opacity: 0, scale: 1.1 },
       {
         duration: 2,
         opacity: 1,
-        display: 'block',
+        scale: 1,
       }
     )
-    .to(sentence3__top, { duration: 1.5, opacity: 1 })
-    .to(
-      sentence3__bottom,
+    .fromTo(
+      '.b-screen__text-down li',
+      { opacity: 0, scale: 1.1 },
       {
-        duration: 1.5,
+        duration: 2,
         opacity: 1,
-        stagger: 0.1,
-        onComplete: () => tlForItemsToBuy.play(),
-      },
-      '+=1'
-    );
-
-  //animation of
-  // .to(sentence3, { onComplete: () => tlForItemsToBuy.play() });
-
-  itemsToBuy.forEach(word => {
-    let tlForWord = gsap.timeline({
-      repeat: 1,
-      yoyo: true,
-      repeatDelay: 1,
-    });
-    tlForWord.fromTo(
-      itemToBuy,
+        scale: 1,
+      }
+    )
+    .fromTo(
+      '.b-screen__animated-items',
       { opacity: 0 },
-      { duration: 1.5, opacity: 1, text: { value: word, delimiter: '' } }
-    );
-    tlForItemsToBuy.add(tlForWord);
-  });
+      {
+        duration: 2,
+        opacity: 1,
+      }
+    )
+    .call(textAnimation());
+
+  // mainTimeline.play('startFromScreenB');
+  // mainTimeline.play('startFromHere');
+  // mainTimeline.pause('stopBeforeScreenB');
+
+  //=============================================================================
+  //   .call(removeElement('.sentence2__icons'))
+  //   .to('.sentence3 .sentence3__top p', { duration: 1.5, opacity: 1 })
+  //   .to(
+  //     '.sentence3 .sentence3__bottom p',
+  //     {
+  //       duration: 1.5,
+  //       opacity: 1,
+  //       stagger: 0.1,
+  //       onComplete: () => tlForItemsToBuy.play(),
+  //     },
+  //     '+=1'
+  //   )
+  //   //animation of
+  // .to('.b-screen', { onComplete: () => tlForItemsToBuy.play() });
+
+  // itemsToBuy.forEach(word => {
+  //   let tlForWord = gsap.timeline({
+  //     repeat: 1,
+  //     yoyo: true,
+  //     repeatDelay: 1,
+  //   });
+  //   tlForWord.fromTo(
+  //     '.item-to-buy',
+  //     { opacity: 0 },
+  //     { duration: 1.5, opacity: 1, text: { value: word, delimiter: '' } }
+  //   );
+  //   tlForItemsToBuy.add(tlForWord);
+  // });
 };
 
-const overlayAnimationHorizontal = target => {
+// function that let us remove element after animation
+function removeElement(element) {
+  if (typeof element === 'string') {
+    element = document.querySelector(element);
+  }
+  return function () {
+    element.parentNode.removeChild(element);
+  };
+}
+
+export { initialAnimation };
+
+/**
+ * removed section for TextPlugin
+ * import { TextPlugin } from 'gsap/TextPlugin';
+ * // registration of TextPlugin that is used in sentence3
+ * gsap.registerPlugin(TextPlugin);
+ * // timeLine for TextPlugin effect that allowes to display different words from imported array...
+ * // use it to make the animation infinite: { repeat: -1 }
+ * const tlForItemsToBuy = gsap.timeline().pause(); //{ repeat: -1 }
+ * ============================================================================
+ * removed section of definition for individual tweens
+  const overlayAnimationHorizontal = target => {
   gsap.fromTo(
     target,
     { scaleX: 1, transformOrigin: '0% 100%' },
@@ -115,7 +216,6 @@ const overlayAnimationVertical = target => {
     }
   );
 };
-
 const textAnimationHorizontal = target => {
   gsap.from(target, {
     scale: 3,
@@ -125,7 +225,6 @@ const textAnimationHorizontal = target => {
     transformOrigin: '0% 100%',
   });
 };
-
 const textAnimationVertical = target => {
   gsap.fromTo(
     target,
@@ -142,27 +241,4 @@ const textAnimationVertical = target => {
     }
   );
 };
-
-// const iconsAnimation = target => {
-//   gsap.fromTo(
-//     target,
-//     {
-//       opacity: 0,
-//       scale: 0.8,
-//       stagger: 0.7,
-//     },
-//     { duration: 2, opacity: 1, scale: 1, stagger: 0.7 }
-//   );
-// };
-
-// function that let us remove element after animation
-function removeElement(element) {
-  if (typeof element === 'string') {
-    element = document.querySelector(element);
-  }
-  return function () {
-    element.parentNode.removeChild(element);
-  };
-}
-
-export { initialAnimation };
+ */

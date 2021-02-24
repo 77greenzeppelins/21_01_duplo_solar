@@ -3,40 +3,29 @@ import React, { useEffect } from 'react';
 import { initialAnimation } from '../../animations/animations';
 //components
 import InitialOverlay from '../initialOverlay/initialOverlay';
-// import InitialOverlay from './components/initialOverlay/initialOverlay';
-import ContentOverlay from '../contentOverlay/contentOverlay';
-import Header from '../header/header';
-import Sentence1 from '../sentence1/sentence1';
-import Sentence2 from '../sentence2/sentence2';
-import Sentence3 from '../sentence3/sentence3';
-
-const animationsTargets = [
-  '.overlay-initial',
-  '.overlay-initial .logo',
-  '.content-overlay .overlay__top',
-  '.content-overlay .overlay__bottom',
-  '.sentence1 p',
-  '.sentence2 p',
-  '.devices-icons svg',
-  '.sentence3',
-  '.sentence3 .sentence3__top p',
-  '.sentence3 .sentence3__bottom p',
-  '.item-to-buy',
-];
+import ScreenATop from '../ScreenATop';
+import ScreenABottom from '../ScreenABottom';
+import ScreenB from '../ScreenB';
 
 const Home = () => {
+  // useEffect(() => {
+  //   let dynamicViewportHeight = window.innerHeight * 0.01;
+  //   document.documentElement.style.setProperty(
+  //     '--dynamicViewportHeight',
+  //     `${dynamicViewportHeight}px`
+  //   );
+  // }, []);
+
   useEffect(() => {
-    initialAnimation(...animationsTargets);
+    initialAnimation();
   }, []);
 
   return (
     <div>
       <InitialOverlay />
-      <ContentOverlay />
-      <Header />
-      <Sentence1 />
-      <Sentence2 />
-      <Sentence3 />
+      <ScreenATop />
+      <ScreenABottom />
+      <ScreenB />
     </div>
   );
 };

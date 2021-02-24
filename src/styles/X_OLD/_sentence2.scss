@@ -1,36 +1,48 @@
 .sentence2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  min-height: 60vh;
+  height: 60vh;
   align-items: center;
+  // border: 1px solid greenyellow;
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    .text-section {
+    .sentence2__text {
       text-align: center;
-
       p {
-        opacity: 0;
-        color: $dark;
+        // opacity: 0;
+        color: $light;
+        mix-blend-mode: difference;
         font-size: $fontMiddle;
         span {
           font-weight: 600;
         }
       }
     }
-
-    .devices-icons {
-      padding-top: 3rem;
+    .sentence2__icons {
+      width: #{'min(90%, 50rem)'};
+      padding-top: 2rem;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
-      svg {
+      .icon {
+        flex-grow: 1;
+        flex-shrink: 1;
         opacity: 0;
-        height: 75px;
-        width: 75px;
+        height: $iconSize;
+        width: $iconSize;
+        padding: 3px;
+        svg {
+          width: inherit;
+          height: inherit;
+          padding: inherit;
+        }
         // height: #{'clamp(50px, 150px, 200px)'};
         // width: #{'clamp(50px, 150px, 200px)'};
         // max-height: 150px;
